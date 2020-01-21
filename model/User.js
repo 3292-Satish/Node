@@ -19,5 +19,5 @@ const userSchema = new schema({
         default: Date.now
     }
 })
-
-module.exports = Users = Mongoose.model("users", userSchema)
+Users = Mongoose.model("users", userSchema);
+module.exports = Users
