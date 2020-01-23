@@ -1,9 +1,11 @@
 let express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    swaggerUi=  require('swagger-ui-express')
     cors = require('cors');
 var app =express();
 var port = process.env.PORT || 3000;
+const swaggerDocument = require('./routes/swagger.json');
 
 
 app.use(bodyParser.json());
@@ -20,6 +22,7 @@ mongoose.connect(mongoURI, {useNewUrlParser : true})
 
     app.use('/users', Users);
 
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
     app.listen(port, ()=>{

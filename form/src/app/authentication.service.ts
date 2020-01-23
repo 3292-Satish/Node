@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import { } from "@angular/forms";
 
 export interface UserDetails {
   _id: string
@@ -10,6 +11,7 @@ export interface UserDetails {
   last_name: string
   email: string
   password: string
+  img: Object
   exp: number
   iat: number
 }
@@ -18,22 +20,23 @@ interface TokenResponse {
   token: string
 }
 
-export interface TokenPayload {
+export interface regPayload {
   _id: string
   first_name: string
   last_name: string
   email: string
   password: string
+  img: string
 }
 
 @Injectable()
 export class AuthenticateService {
   private token: string;
-  url = "http://localhost:3000";
-  
+  // url = "http://localhost:3000";
 
 
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router) { }
   private saveToken(token: string): void {
     localStorage.setItem('usertoken', token)
     this.token = token
@@ -67,9 +70,16 @@ export class AuthenticateService {
     }
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    
-    const base = this.http.post(this.url + `/users/register`, user)
+  public upload(img): Observable<any>{
+    var formData= new FormData;
+    formData.append('img', img);
+    let uplod = this.http.post('/users/upload', formData)
+    return uplod;
+  }
+
+  public register(user: regPayload): Observable<any> {
+
+    const base = this.http.post(`/users/register`, user)
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -83,9 +93,9 @@ export class AuthenticateService {
     return request
   }
 
-  public login(user: TokenPayload): Observable<any> {
-    
-    const base = this.http.post(this.url+`/users/login`, user)
+  public login(user: regPayload): Observable<any> {
+
+    const base = this.http.post(`/users/login`, user)
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -98,10 +108,11 @@ export class AuthenticateService {
 
     return request
   }
+  
 
   public profile(): Observable<any> {
- 
-    return this.http.get(this.url+`/users/profile`, {
+
+    return this.http.get(`/users/profile`, {
       headers: { Authorization: ` ${this.getToken()}` }
     })
   }

@@ -14,6 +14,9 @@ const userSchema = new schema({
     password:{
         type: String
     },
+    img:{
+        type: String
+    },
     Date:{
         type: Date,
         default: Date.now

@@ -1,0 +1,513 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "demo",
+        "description": "Manage the Api",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users/register": {
+            "post": {
+                "summary": "User Inserted",
+                "tags": [
+                    "user"
+                ],
+                "consumes": "application/json",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "name": "first_name",
+                        "in": "formData",
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "type": "string"
+                    },
+                    {
+                        "name": "img",
+                        "in": "formData",
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "summary": "User Loging",
+                "tags": [
+                    "user"
+                ],
+                "consumes": "application/json",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "email",
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/login"
+                    }
+
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+
+
+
+    "definitions": {
+        "company":{
+            "required":[
+                "company_name",
+                "dba",
+                "license",
+                "type",
+                "status",
+                "year_founded",
+                "community_provider_id",
+                "external_website",
+                "company_logo",
+                "company_overview"
+            ],
+            "properties":{
+                "company_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "dba": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "license": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "type": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "status": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "year_founded": {
+                    "type": "year",
+                    "uniqueItems": false
+                },
+                "community_provider_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "external_website": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "company_logo": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "company_overview": {
+                    "type": "string",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "message": {
+            "required": [
+                "sender_id",
+                "reciever_id",
+                "text",
+                "subject",
+                "date",
+                "time",
+                "type"
+            ],
+            "properties": {
+                "sender_id": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "reciever_id": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "text": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "subject": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "date": {
+                    "type": "string",
+                    "uniqueItems": false,
+                    "format": "date"
+                },
+                "time": {
+                    "type": "string",
+                    "uniqueItems": false,
+                    "format": "time"
+                },
+                "type" : {
+                    "type": "string",
+                    "uniqueItems": false,
+                    "format": "time"
+                }
+            }
+        },
+        "user": {
+            "required": [
+                "f_name",
+                "l_name",
+                "user_name",
+                "slogan",
+                "email",
+                "alternate_email",
+                "phone",
+                "hometown",
+                "education",
+                "about",
+                "code",
+                "status",
+                "password",
+                "nick_name",
+                "started_industry"
+            ],
+            "properties": {
+                "f_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "l_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "user_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "slogan": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "alternate_email": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "phone": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "hometown": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "education": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "about": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "code": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "status": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "user_role": {
+            "required": [
+                "user_id",
+                "community_provider_id",
+                "parent_id",
+                "root_id",
+                "incentive_id",
+                "event_id",
+                "role_id",
+                "permission_id"
+            ],
+            "properties": {
+                "user_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "community_provider_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "parent_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "root_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "incentive_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "event_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "role_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "permission_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "incentive": {
+            "required": [
+                "incentive_name",
+                "duration_start",
+                "duration_end",
+                "incentive_limit",
+                "email",
+                "incentive_value",
+                "description",
+                "legal_desclaimer"
+            ],
+            "properties": {
+                "incentive_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "duration_start": {
+                    "type": "string",
+                    "format": "date",
+                    "uniqueItems": false
+                },
+                "duration_end": {
+                    "type": "string",
+                    "format": "date",
+                    "uniqueItems": false
+                },
+                "incentive_limit": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "incentive_value": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "description": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "legal_desclaimer": {
+                    "type": "string",
+                    "uniqueItems": false
+                }
+            }
+        },
+
+        "community_provider": {
+            "required": [
+                "comm_name",
+                "address",
+                "city",
+                "state",
+                "zip_code",
+                "type",
+                "code"
+            ],
+            "properties": {
+                "comm_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "address": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "city": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "state": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "zip_code": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "type": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "code": {
+                    "type": "number",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "event": {
+            "required": [
+                "event_name",
+                "date",
+                "time",
+                "repeat_event",
+                "repeat_until",
+                "event_details",
+                "event_url",
+                "event_image",
+                "event_keywords"
+            ],
+            "properties": {
+                "community_provder_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "event_name": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date",
+                    "uniqueItems": false
+                },
+                "time": {
+                    "type": "string",
+                    "format": "time",
+                    "uniqueItems": false
+                },
+                "repeat_event": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "repeat_until": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "event_details": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "event_url": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "event_image": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "event_keywords": {
+                    "type": "string",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": false
+                },
+                "password": {
+                    "type": "string",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "requestotp": {
+            "required": [
+                "community_provider_id",
+                "count"
+            ],
+            "properties": {
+                "community_provider_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "count": {
+                    "type": "number",
+                    "uniqueItems": false
+                }
+            }
+        },
+        "verifyotp": {
+            "required": [
+                "community_provider_id",
+                "otp"
+            ],
+            "properties": {
+                "community_provider_id": {
+                    "type": "number",
+                    "uniqueItems": false
+                },
+                "otp": {
+                    "type": "number",
+                    "uniqueItems": false
+                }
+            }
+        }
+    }
+}

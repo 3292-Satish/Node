@@ -1,29 +1,61 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mt-5 mx-auto">
-            <form (submit)="register()">
+            <form (submit)="register()" [formGroup]="registerForm">
                 <h1 class="h3 mb-3 font-weight-normal">Register</h1>
                 <div class="form-group">
                     <label for="name">First name</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="Enter your first name"
-                        [(ngModel)]="credentials.first_name">
+                    <input type="text" [ngClass]="{'is-invalid': submitted && f.first_name.errors }"
+                        class="form-control" formControlName="first_name" placeholder="Enter your first name"
+                        [(ngModel)]="credentials.first_name" required>
+                    <div
+                        *ngIf="registerForm.controls.first_name.invalid && (f.first_name.touched || f.first_name.dirty)">
+                        <div *ngIf="f.first_name.errors.required" class="alert-danger">First Name is required</div>
+                        <div *ngIf="f.first_name.errors.minlength" class="alert-danger">Should be grater then 4 letter
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="name">Last name</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Enter your lastname name"
+                    <label for="last_Name">Last name</label>
+                    <input type="text" required [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"
+                        class="form-control" formControlName="last_name" placeholder="Enter your last name"
                         [(ngModel)]="credentials.last_name">
+                    <div *ngIf="registerForm.controls.last_name.invalid && (f.last_name.touched || f.last_name.dirty)">
+                        <div *ngIf="f.last_name.errors.required" class="alert-danger">Last Name is required </div>
+                        <div *ngIf="f.last_name.errors.minlength" class="alert-danger">Should be grater then 4 letter
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter email"
+                    <input type="email" required [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                        class="form-control" formControlName="email" placeholder="Enter email"
                         [(ngModel)]="credentials.email">
+                    <div *ngIf="registerForm.controls.email.invalid && (f.email.touched || f.email.dirty)">
+                        <div *ngIf="f.email.errors.required" class="alert-danger">Email is required</div>
+                        <div *ngIf="f.email.errors.pattern" class="alert-danger">Invalid Email ID</div>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password"
+                    <input type="password" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                        class="form-control" formControlName="password" placeholder="Password"
                         [(ngModel)]="credentials.password">
+                    <div *ngIf="registerForm.controls.password.invalid && (f.password.touched || f.password.dirty)">
+                        <div *ngIf="f.password.errors.required" class="alert-danger">Password is required</div>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="img">Upload Image</label>
+                    <input type="file" required class="form-control" formControlName="img" (change)="selectImg($event)" >
+                </div>
+
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Register!</button>
+                <button class="btn btn-secondary btn-block" type="reset" (click)="onReset()">Cancel</button>
             </form>
         </div>
     </div>

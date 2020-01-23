@@ -1,18 +1,30 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-6 mt-5 mx-auto">
-        <form (submit)="login()">
-          <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+  <div class="row">
+    <div class="col-md-6 mt-5 mx-auto">
+      <form (submit)="login()" [formGroup]="loginForm">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" required [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control"
+            formControlName="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+          <div *ngIf="loginForm.controls.email.invalid && (f.email.touched || f.email.dirty)">
+            <div *ngIf="f.email.errors.required" class="alert-danger">Email is required</div>
+            <div *ngIf="f.email.errors.pattern" class="alert-danger">Invalid Email ID</div>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+        </div>
+
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" required [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+            class="form-control" formControlName="password" placeholder="Password" [(ngModel)]="credentials.password">
+          <div *ngIf="loginForm.controls.password.invalid && (f.password.touched || f.password.dirty)">
+            <div *ngIf="f.password.errors.required" class="alert-danger">Password is required</div>
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+        <button class="btn btn-secondary btn-block" type="reset" (click)="onReset()">Cancel</button>
+      </form>
     </div>
   </div>
+</div>
