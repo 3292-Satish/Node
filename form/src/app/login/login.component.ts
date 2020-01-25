@@ -31,14 +31,23 @@ get f() { return this.loginForm.controls; }
 
   login() {
     this.auth.login(this.credentials).subscribe(
-      () => {
+      (data) => {
+        if(!data.Error){
         alert("login Successful "+ JSON.stringify(this.loginForm.value.email, null, 4));
         this.router.navigateByUrl('/profile')
+        }else{
+          alert(data.Error);
+        }
       },
       err => {
         console.error(err)
       }
     )
+  }
+
+  chngPass(){
+    console.log("Change");
+    this.router.navigate(["/changePass"]);
   }
 
   onReset() {

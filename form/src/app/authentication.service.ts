@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
@@ -11,7 +11,7 @@ export interface UserDetails {
   last_name: string
   email: string
   password: string
-  img: Object
+  img: string
   exp: number
   iat: number
 }
@@ -49,6 +49,20 @@ export class AuthenticateService {
     return this.token
   }
 
+  onEdit(usr) {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+    let params = new HttpParams();
+    let formData = new FormData();
+      formData.append("_id", usr._id),
+      formData.append("first_name", usr.first_name),
+      formData.append("last_name", usr.last_name),
+      formData.append("email", usr.email),
+      formData.append("img", usr.img);
+    return this.http.put("/users/update", usr, { params, headers });
+  }
+
   public getUserDetails(): UserDetails {
     const token = this.getToken()
     let payload
@@ -64,17 +78,24 @@ export class AuthenticateService {
   public isLoggedIn(): boolean {
     const user = this.getUserDetails()
     if (user) {
-      return user.exp > Date.now() / 1000
-    } else {
+      return user.exp > Date.now() / 1000000
       return false
     }
   }
 
-  public upload(img): Observable<any>{
-    var formData= new FormData;
+  public upload(img): Observable<any> {
+    var formData = new FormData();
     formData.append('img', img);
-    let uplod = this.http.post('/users/upload', formData)
-    return uplod;
+    return this.http.post('/users/upload', formData)
+  }
+
+  public resetPass(email): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', null);
+    headers.set('Accept', "multipart/form-data");
+    let params = new HttpParams();
+    let Email = {'email': email};
+      return this.http.post('/users/resetPass', Email, { params, headers});
   }
 
   public register(user: regPayload): Observable<any> {
@@ -108,7 +129,7 @@ export class AuthenticateService {
 
     return request
   }
-  
+
 
   public profile(): Observable<any> {
 

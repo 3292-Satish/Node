@@ -1,0 +1,19 @@
+<p>change-pass works!</p>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5 mx-auto">
+          
+            <h1 class="h3 mb-3 font-weight-normal">Enter Email ID</h1>
+            <p>A Verification Code will be sent on your registered mail.!</p>
+            <div class="form-group">
+                <label for="email">Email address<span class="red-text">*</span></label>
+                <input type="email" required #email class="form-control"  placeholder="Enter email">
+
+                <button type="submit" (click)="changePass(email.value)" class="btn btn-lg btn-primary">Reset Password</button>
+            </div>
+           
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@ const swaggerDocument = require('./routes/swagger.json');
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
-
+app.use(express.static('img'));
 const mongoURI = 'mongodb://localhost:27017/loginreg'
 
 mongoose.connect(mongoURI, {useNewUrlParser : true})

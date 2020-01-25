@@ -51,7 +51,19 @@
 
                 <div class="form-group">
                     <label for="img">Upload Image</label>
+                    <div style="width: auto; height: auto;">
+
+                        <!-- For Single image Upload -->
+
                     <input type="file" required class="form-control" formControlName="img" (change)="selectImg($event)" >
+                    <img [src]="imgURL" height="200" *ngIf="imgURL">
+
+                    <!-- For multiple Image UPload -->
+                    <br><br>
+
+                    <!-- <input type="file" multiple class="form-control" formControlName="img" (change)="selectImage($event)">
+                    <img  *ngFor="let url of urls"  [src]="url" alt="" height="100px"> -->
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-lg btn-primary btn-block">Register!</button>

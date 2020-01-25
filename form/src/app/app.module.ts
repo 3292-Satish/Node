@@ -12,14 +12,20 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { RegisterComponent } from "./register/register.component";
+import { HobbyComponent } from "./hobby/hobby.component";
 import { AuthGaurdService } from "./auth-gaurd.service";
 import { AuthenticateService } from "./authentication.service";
+import { ChangePassComponent } from './change-pass/change-pass.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'register/:action', component: RegisterComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent, canActivate:[AuthGaurdService] }
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGaurdService] },
+  { path: 'hobby', component: HobbyComponent, canActivate:[AuthGaurdService] },
+  { path: 'changePass', component:ChangePassComponent }
 ]
 
 @NgModule({
@@ -28,7 +34,9 @@ const routes: Routes = [
     HomeComponent,
     LoginComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    HobbyComponent,
+    ChangePassComponent
   ],
   imports: [
     BrowserModule,

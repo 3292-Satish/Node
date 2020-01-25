@@ -1,26 +1,36 @@
 
 
 <div class="container">
+    
+    
     <div class="jumbotron mt-5">
+        <div class="topcorner">
+            <button class="btn btn-primary" (click)="userHobby()">Add User's Address</button>
+        </div>
         <div class="col-sm-8 mx-auto">
             <h1 class="text-center">PROFILE</h1>
         </div>
         <table class="table col-md-6 mx-auto">
             <tr>
                 <td>Fist Name</td>
-                <td>{{ details?.first_name }}</td>
+                <td contenteditable="true" #first_name>{{ details?.first_name }}</td>
             </tr>
             <tr>
                 <td>Last Name</td>
-                <td>{{ details?.last_name }}</td>
+                <td contenteditable="true" #last_name tool-tip="profile" >{{ details?.last_name }}</td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td>{{ details?.email }}</td>
+                <td contenteditable="true" #email>{{ details?.email }}</td>
             </tr>
             <tr>
                 <td>Photo</td>
-                <td>{{ details?.img }}</td>
+                <td contenteditable="true" ><img height="100px" draggable="true" #img (error)="onImgErr($event)" [src]= "'http://localhost:3000/'+details?.img"></td>
+                <!-- <img [src]="../../../../img/"> -->
+            </tr>
+            <tr>
+                <button class="btn btn-secondary" style="margin: 10px;" (click)="onUpdate(first_name, last_name, email)">Update</button>
+                <!-- <button class="btn btn-danger" (click)="onDelete()">Delete</button> -->
             </tr>
         </table>
     </div>
